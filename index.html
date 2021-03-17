@@ -42,8 +42,8 @@
     <p>&nbsp;</p>
     <p>&nbsp;</p>
   </div>
-  <style>
-#main, .logobalk, .pagina, .navigatiebalk, .content, .voetbalk {
+<style>
+#main, .logobalk, .pagina, .navigatiebalk, .content, .voetbalk, .module, .filter {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -76,30 +76,33 @@
 	top: auto;
 	background-color:#960;
 }
-	  body {
-		  background: red;
-	  }
+	
 </style>
-<div id="main">
-	<div id="T1_home">
-    	<div class="logobalk">
-        	<p style="text-align:center">Logo</p>
-        </div>
-        <div class="pagina">
-        	<div class="navigatiebalk">
-            	<button onClick="fieTB()">Eerste</button>
+    <div id="main">
+        <div id="filter" class="filter" onclick="hideFilter()" style="z-index:1000; display:none; background-color: rgba(150, 150, 150, 0.8)"></div>
+        <div id="T1_home" class="module">
+            <div class="logobalk" onclick="geenaandacht()">
+                <p style="text-align:center">Logo</p>
             </div>
-            <div class="content">Eerste</div>
-            <div class="voetbalk"></div>
-        </div>
-        <div class="pagina" style="display:none">
-        	<div class="navigatiebalk">
+            <div class="pagina">
+                <div class="navigatiebalk">
+                    <button onClick="fieTB()">Eerste</button>
+                </div>
+                <div class="content">Eerste</div>
+                <div class="voetbalk"></div>
             </div>
-            <div class="content">Eerste</div>
-            <div class="voetbalk">Tweede</div>
+            <div class="pagina" style="display:none">
+                <div class="navigatiebalk">
+                </div>
+                <div class="content">Eerste</div>
+                <div class="voetbalk">Tweede</div>
+            </div>
+            <div id="schuifblok" style="z-index: 1001; position:absolute; left: -200px; top:0;bottom:0; width:200px;background-color:goldenrod">
+				<p>Modules</p>
+
+			</div>
         </div>
     </div>
-</div>
 <script>
 	function fieTB(){
 		
@@ -107,8 +110,23 @@
 			document.getElementsByClassName("pagina").item(i).style.display= "none";
 		}
 		document.getElementsByClassName("pagina").item(1).style.display = "block";
+		links = -200
+		let timer = setInterval(function () {
+			if (links >-1) clearInterval(timer);
+			else {
+				links += 20;
+				document.getElementById("schuifblok").style.left = links + "px";
+			}
+		}, 20);
+		document.getElementById("filter").style.display = "block";
+		//document.getElementById("schuifblok").style.left = "15px";
 	}
-</script> 
+
+	function hideFilter() {
+		document.getElementById("filter").style.display = "none";
+		document.getElementById("schuifblok").style.left = "-200px";
+	}
+</script>
   
   
   
